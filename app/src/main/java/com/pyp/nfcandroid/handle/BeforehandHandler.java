@@ -15,6 +15,10 @@ import android.nfc.tech.NfcV;
 import android.os.Handler;
 import android.os.Message;
 
+import com.pyp.nfcandroid.appconfig.FragementType;
+import com.pyp.nfcandroid.isodephandler.BusCardHanler;
+import com.pyp.nfcandroid.listener.NDEFEndListener;
+
 import org.json.JSONObject;
 
 /**
@@ -25,24 +29,20 @@ import org.json.JSONObject;
 //在这个类中对NDEF数据进行预处理，从而分配到不同的处理中
 public class BeforehandHandler {
 
-    private int mType =-1;
+    private NDEFEndListener mlistener;
+    private Handler mhandler;
 
-    //对NDEF数据进行解析，产生不同的解析结果，结果用JSONObject存储,且于handler放回
-    public Void Analysis(Intent intent, Handler handler){
+    public BeforehandHandler(NDEFEndListener listener, Handler handler){
+        mlistener=listener;
+        mhandler=handler;
+    }
 
-        JSONObject Data=infTypeAnalysis(intent);
-        Message message=new Message();
-        if(null!=Data){
-            message.what=mType;
-            message.obj=Data;
-        }
-        handler.sendMessage(message);
+    //对NDEF数据进行解析，产生不同的解析结果，结果用JSONObject存储
+    public Void Analysis(Intent intent){
+        infTypeAnalysis(intent);
         return null;
     }
 
-    public JSONObject Analysis(Intent intent){
-        return infTypeAnalysis(intent);
-    }
 
 
     //对NDEF数据的inf类型进行判断
@@ -51,22 +51,19 @@ public class BeforehandHandler {
     // action.TAG_DISCOVERED(自定义标签，用于读特殊标签)
     // action.NDEF_DISCOVERED(规范化标签，用于自己读写)
     // ｝
-    private JSONObject infTypeAnalysis(Intent intent){
+    private void infTypeAnalysis(Intent intent){
         String name=intent.getAction();
-        JSONObject Date=null;
         switch (name){
             case NfcAdapter.ACTION_NDEF_DISCOVERED:
                 break;
             case NfcAdapter.ACTION_TAG_DISCOVERED:
                 break;
             case NfcAdapter.ACTION_TECH_DISCOVERED:
-                Date=TechAnalysis(intent);
+                techAnalysis(intent);
                 break;
             default:
-                Date=null;
         }
 
-        return Date;
 
     }
 
@@ -77,24 +74,16 @@ public class BeforehandHandler {
     // jis 6319-4     ---->NfcF
     // iso 15693      ---->NfcV
     // }
-    private JSONObject TechAnalysis(Intent intent){
+    private void techAnalysis(Intent intent){
 
         Tag tag= intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
         //取卡的第一个协议为解析协议
         String TechName= tag.getTechList()[0];
 
-//        setType(FragementType.TEXT_SINGLE);
-//                JSONObject json=new JSONObject();
-//                try {
-//                    json.put("Data",tag.getTechList()[0]);
-//                    return json;
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-
         switch (TechName){
             case "android.nfc.tech.IsoDep":
                 IsoDep isodep = IsoDep.get(tag);
+                isodepType(isodep);
                 break;
             case "android.nfc.tech.NfcV":
                 NfcV nfcv = NfcV.get(tag);
@@ -122,8 +111,31 @@ public class BeforehandHandler {
                 break;
         }
 
+    }
 
-        return null;
+    //对iso 14443      ---->IsoDep  协议进行类型分析，分到不同的解析场景中{
+    // 公交卡   -----》BusCardHanler
+    // 银行卡   ----->>.......
+    // }
+    private void isodepType(IsoDep isodep){
+        if(null!=isodep){
+            sendDate(BusCardHanler.BusCardHanler(isodep),FragementType.TEXT_SINGLE);
+        }
+    }
+
+    //向目标传递信息{
+    // Data  为 解析的数据
+    // type  为 用什么Fragment加载信息
+    // }
+    private void sendDate(final JSONObject Data, final int type){
+        mhandler.post(new Runnable() {
+            @Override
+            public void run() {
+                if(null!=Data){
+                    mlistener.End(Data,type);
+                }
+            }
+        });
     }
 
 

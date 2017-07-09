@@ -8,9 +8,11 @@ import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.widget.LinearLayout;
 
+
 import com.pyp.nfcandroid.R;
 import com.pyp.nfcandroid.fragment.BaseFragment;
 import com.pyp.nfcandroid.handle.BeforehandHandler;
+import com.pyp.nfcandroid.listener.NDEFEndListener;
 
 import org.json.JSONObject;
 
@@ -20,7 +22,7 @@ import org.json.JSONObject;
 
 //该Activity是处理NDEF数据的地方（用于读操作）
     //当手机收到关于NFC发送端的信号，产生相对应的intent时由Activity是第一启动项
-public class NFCHandlerActivity extends NFCReceiveActivity {
+public class NFCHandlerActivity extends NFCReceiveActivity implements NDEFEndListener{
 
     //前景（存在加载界面）
     private LinearLayout mForeground;
@@ -29,27 +31,14 @@ public class NFCHandlerActivity extends NFCReceiveActivity {
     //处理NDEF数据对象
     private BeforehandHandler mNDEFHandler;
 
-    //传人BeforehandHandle类的Handler对象，根据参数来加载不同的Fragment
-    private Handler mHandler=new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-
-            JSONObject Data= (JSONObject) msg.obj;
-            if(null!=Data){
-                Fragment fragment= BaseFragment.CreateFragment(Data,msg.what);
-                addFragment(fragment);
-            }
-            hideForeground();
-        }
-    };
+    private Handler handler=new Handler();
 
     @Override
     protected void initParameter() {
         super.initParameter();
         mForeground=(LinearLayout)findViewById(R.id.act_handler_Foreground);
         mFragmentManager=getSupportFragmentManager();
-        mNDEFHandler=new BeforehandHandler();
+        mNDEFHandler=new BeforehandHandler(this,handler);
         onNewIntent(getIntent());
     }
 
@@ -73,7 +62,7 @@ public class NFCHandlerActivity extends NFCReceiveActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                mNDEFHandler.Analysis(intent,mHandler);
+                mNDEFHandler.Analysis(intent);
             }
         }).start();
     }
@@ -90,5 +79,12 @@ public class NFCHandlerActivity extends NFCReceiveActivity {
         if(null!=fragment){
             mFragmentManager.beginTransaction().replace(R.id.act_handler_container,fragment).commit();
         }
+    }
+
+    @Override
+    public void End(JSONObject Data, int type) {
+        Fragment fragment= BaseFragment.CreateFragment(Data,type);
+        addFragment(fragment);
+        hideForeground();
     }
 }

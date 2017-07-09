@@ -29,11 +29,8 @@ public class TextFragment extends BaseFragment{
 
     @Override
     public void dealWithData(JSONObject Data) {
-        try {
-            String data=Data.getString("Data");
-            showView.setText(data);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+
+            showView.setText(Data.toString());
+
     }
 }
