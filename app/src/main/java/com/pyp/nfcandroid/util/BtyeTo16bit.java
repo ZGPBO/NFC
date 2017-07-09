@@ -30,6 +30,7 @@ public class BtyeTo16bit {
 
     public static boolean isSuccessfully(byte[] data){
         boolean flag=false;
+
         String result=HexToString(data);
         return "9000".equals(result.substring(result.length()-4,result.length()));
     }
