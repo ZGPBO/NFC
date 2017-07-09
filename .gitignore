@@ -1,12 +1,3 @@
-.idea
-.gradle
-/local.properties
-/.idea/workspace.xml
-/.idea/libraries
-/build
-/captures
-=======
->>>>>>> 09d68fcea9510dd91ecfb99b4c06bb2dfc187b22
 # Built application files
 *.apk
 *.ap_
@@ -20,11 +11,11 @@
 # Generated files
 bin/
 gen/
+out/
 
 # Gradle files
 .gradle/
 build/
-/*/build/
 
 # Local configuration file (sdk path, etc)
 local.properties
@@ -34,3 +25,15 @@ proguard/
 
 # Log Files
 *.log
+
+# Android Studio Navigation editor temp files
+.navigation/
+
+# Android Studio captures folder
+captures/
+
+# Intellij
+*.iml
+
+# Keystore files
+*.jks
