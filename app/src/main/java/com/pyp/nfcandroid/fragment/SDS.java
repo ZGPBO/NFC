@@ -5,4 +5,6 @@ package com.pyp.nfcandroid.fragment;
  */
 
 public class SDS {
+
+    int i;
 }
