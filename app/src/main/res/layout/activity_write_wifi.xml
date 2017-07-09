@@ -1,0 +1,84 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="WIFI自动连接设置"
+        android:gravity="center"
+        android:id="@+id/actionName"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/actionName"
+        android:id="@+id/layout1"
+        >
+        <TextView
+            android:id="@+id/wifiName_txt"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:text="WIFI名字"
+            android:textSize="18dp"
+            />
+
+        <EditText
+            android:id="@+id/wifiName_edt"
+            android:layout_width="0dp"
+            android:layout_weight="6"
+            android:layout_height="wrap_content"
+            android:hint="请输入WIFI名字" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/layout1"
+        android:id="@+id/layout2"
+        >
+        <TextView
+            android:id="@+id/wifiPassword_txt"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:text="WIFI密码"
+            android:textSize="18dp"
+            />
+
+        <EditText
+            android:id="@+id/wifiPassword_edt"
+            android:layout_width="0dp"
+            android:layout_weight="6"
+            android:layout_height="wrap_content"
+            android:hint="请输入WIFI密码" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/noteText"
+        android:textSize="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="  现在请将设备背面靠近标签"
+        />
+    <Button
+        android:id="@+id/writeBtn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
+        android:text="开始打入标签" />
+
+</RelativeLayout>
