@@ -83,8 +83,10 @@ public class NFCHandlerActivity extends NFCReceiveActivity implements NDEFEndLis
 
     @Override
     public void End(JSONObject Data, int type) {
-        Fragment fragment= BaseFragment.CreateFragment(Data,type);
-        addFragment(fragment);
-        hideForeground();
+        if(null!=Data){
+            Fragment fragment= BaseFragment.CreateFragment(Data,type);
+            addFragment(fragment);
+            hideForeground();
+        }
     }
 }
