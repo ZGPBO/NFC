@@ -42,7 +42,6 @@ public abstract class BaseFragment extends Fragment {
             if(null!=Data){
                 dealWithData(Data);
             }
-
         }catch (Exception e){
             L.showTag(L.ERROR_FRAGMENT,"Fragment处理数据错误");
         }
@@ -65,15 +64,17 @@ public abstract class BaseFragment extends Fragment {
     //type为Fragment的类型ID，在
     public static Fragment CreateFragment(JSONObject Data,int type){
 
-
         //取出对应的Fragment
         Fragment TargetFrag=FragementType.getFragment(type);
 
-        //对Fragment绑定数据
-        Bundle bundle=new Bundle();
-        bundle.putString(BUNDLE_DATA,Data.toString());
-        TargetFrag.setArguments(bundle);
-        return TargetFrag;
+        if(null!=TargetFrag){
+            //对Fragment绑定数据
+            Bundle bundle=new Bundle();
+            bundle.putString(BUNDLE_DATA,Data.toString());
+            TargetFrag.setArguments(bundle);
+            return TargetFrag;
+        }
+        return null;
     }
 
 }
