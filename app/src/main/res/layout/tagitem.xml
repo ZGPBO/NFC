@@ -1,5 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:paddingBottom="4dip" android:layout_width="fill_parent"
+    android:gravity="center_horizontal"
+    android:background="@drawable/setbar_bg">
+    <LinearLayout
+        android:id="@+id/shoukuan"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
 
+        android:gravity="center"
+        android:orientation="vertical">
+
+      <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <ImageView
+                android:id="@+id/img_image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+
+                android:src="@mipmap/car"/>
+
+            <TextView
+                android:id="@+id/txt_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="汽车"
+                android:textColor="#000000"
+                android:layout_marginLeft="5dp"
+                android:textSize="15dp"
+                android:layout_toRightOf="@id/img_image"
+
+                />
+            <TextView
+                android:id="@+id/txt_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="激活蓝牙，地图"
+                android:textColor="#000000"
+                android:textSize="13dp"
+                android:layout_toRightOf="@id/img_image"
+                android:layout_below="@id/txt_title"
+                />
+
+        </RelativeLayout>
+
+    </LinearLayout>
 </RelativeLayout>
