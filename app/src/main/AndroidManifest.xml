@@ -36,6 +36,13 @@
         </activity>
 
         <activity android:name=".activity.SelectPictureActivity">
+
+        </activity>
+
+        <activity android:name=".activity.InputNdefActivity">
+
+        </activity>
+        <activity android:name=".activity.WifiWriteActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
