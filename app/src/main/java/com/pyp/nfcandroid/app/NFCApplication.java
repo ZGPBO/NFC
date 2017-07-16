@@ -1,6 +1,8 @@
 package com.pyp.nfcandroid.app;
 
 import android.app.Application;
+import android.content.Context;
+import android.net.wifi.WifiManager;
 import android.nfc.NfcAdapter;
 
 /**
@@ -15,11 +17,13 @@ public class NFCApplication extends Application {
     public void onCreate() {
         super.onCreate();
         mNfcAdapter=NfcAdapter.getDefaultAdapter(this);
+
     }
 
     public NfcAdapter getNfcAdapter() {
         return mNfcAdapter;
     }
+
 
 
 

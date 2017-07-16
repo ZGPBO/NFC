@@ -4,8 +4,15 @@
 
     <uses-sdk android:minSdkVersion="10" />
 
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.NFC" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+
 
     <application
         android:allowBackup="true"
@@ -36,11 +43,37 @@
         </activity>
 
         <activity android:name=".activity.SelectPictureActivity">
+
+        </activity>
+
+        <activity android:name=".activity.InputNdefActivity">
+
+        </activity>
+        <activity android:name=".activity.WifiWriteActivity">
+
+        </activity>
+        <activity android:name=".activity.PosterWriteActivity">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="file" />
+            </intent-filter>
+        </activity >
+        <activity android:name=".activity.NfcTagActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".activity.CarModelActivity"></activity>
+        <activity android:name=".activity.OfficeActivity"></activity>
+        <activity android:name=".activity.HomeActivity"></activity>
+        <activity android:name=".activity.BedActivity"></activity>
+        <activity android:name=".activity.MsgActivity"></activity>
+        <activity android:name=".activity.CallActivity"></activity>
+
     </application>
 
 </manifest>
