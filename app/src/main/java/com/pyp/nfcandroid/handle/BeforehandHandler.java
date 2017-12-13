@@ -7,7 +7,6 @@ import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.nfc.tech.IsoDep;
 import android.nfc.tech.MifareClassic;
-import android.nfc.tech.MifareUltralight;
 import android.nfc.tech.Ndef;
 import android.nfc.tech.NdefFormatable;
 import android.nfc.tech.NfcA;
@@ -16,17 +15,14 @@ import android.nfc.tech.NfcF;
 import android.nfc.tech.NfcV;
 import android.os.Handler;
 import android.os.Parcelable;
-import android.widget.Toast;
 
 import com.pyp.nfcandroid.appconfig.FragementType;
-
 import com.pyp.nfcandroid.isodephandler.BusCardHanler;
 import com.pyp.nfcandroid.listener.NDEFEndListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.io.UnsupportedEncodingException;
 
 /**
@@ -49,6 +45,7 @@ public class BeforehandHandler {
     //对NDEF数据进行解析，产生不同的解析结果，结果用JSONObject存储
     public Void Analysis(Intent intent){
         infTypeAnalysis(intent);
+
         return null;
     }
 
@@ -71,6 +68,8 @@ public class BeforehandHandler {
             case NfcAdapter.ACTION_TECH_DISCOVERED:
                 techAnalysis(intent);
                 break;
+            case Intent.ACTION_VIEW:
+                sendDate(null,FragementType.FILE_FINSH);
             default:
         }
 
@@ -159,8 +158,6 @@ public class BeforehandHandler {
                 }
 
             }
-
-
 
             NdefFormatable formatable = NdefFormatable.get(tag);
             if (formatable != null) {

@@ -2,12 +2,10 @@ package com.pyp.nfcandroid.activity;
 
 import android.content.Intent;
 import android.os.Handler;
-import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.widget.LinearLayout;
-
 
 import com.pyp.nfcandroid.R;
 import com.pyp.nfcandroid.fragment.BaseFragment;
@@ -89,4 +87,7 @@ public class NFCHandlerActivity extends NFCReceiveActivity implements NDEFEndLis
             hideForeground();
         }
     }
+
+
+
 }

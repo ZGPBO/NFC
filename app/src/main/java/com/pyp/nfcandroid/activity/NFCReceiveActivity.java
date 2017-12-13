@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-
 import com.pyp.nfcandroid.appconfig.NfcFilterConfig;
 
 /**

@@ -9,4 +9,5 @@ import org.json.JSONObject;
 public interface NDEFEndListener {
 
     public abstract void End(JSONObject Data,int type);
+
 }

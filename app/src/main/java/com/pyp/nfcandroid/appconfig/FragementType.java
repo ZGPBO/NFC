@@ -8,6 +8,7 @@ import com.pyp.nfcandroid.fragment.CarFragment;
 import com.pyp.nfcandroid.fragment.MsgFragment;
 import com.pyp.nfcandroid.fragment.Office_Home_Fragment;
 import com.pyp.nfcandroid.fragment.PosterFragment;
+import com.pyp.nfcandroid.fragment.ReceivedFileFragment;
 import com.pyp.nfcandroid.fragment.TextFragment;
 import com.pyp.nfcandroid.fragment.WifiFragment;
 
@@ -35,6 +36,8 @@ public class FragementType {
     public static final int MSG_CONTENT=7;
 
     public static final int CALL_CONTENT=8;
+
+    public static final int FILE_FINSH=9;
 
 
     //根据对应的type返回对应fragment
@@ -67,6 +70,8 @@ public class FragementType {
             case CALL_CONTENT:
                 fragment=new CallFragment();
                 break;
+            case FILE_FINSH:
+                fragment=new ReceivedFileFragment();
         }
 
         return fragment;
